@@ -19,13 +19,43 @@ public class RobotBase
             
             //Direction.NORTH, EAST, SOUTH, WEST
             //Definicion de la ubicacion del robot, Ciudad, posicion, Direccion, Numero things en el bolso.
-            estudiante = new Robot(objetos,0, 2, Direction.EAST,10);
+            estudiante = new Robot(objetos,1, 2, Direction.SOUTH,10);
+            //primera secuencia
+            /*giro(2);
+            mover(1);
+            for (int i=0; i<3;i++){
+                giro(3);
+                mover(3);
+            }
+            giro (3);
+            mover(2);
+            giro(2);*/
+            
+            //segunda secuencia
+            for (int i=0;i<3;i++){
+            while(!estudiante.frontIsClear()){
+                estudiante.turnLeft();
+            }
+            mover(1);
+            }
+            if(estudiante.canPickThing())
+                estudiante.pickThing();
+            giro(2);
+            mover(1);
+            for(int j =0;j<2;j++){
+                giro(3);
+                mover(1);
+            }
+            giro(3);
+            estudiante.putThing();
             
 	    //Mover una interseccion en el sentido al cual este apuntando el objeto.
-            estudiante.move ();
+            
+            /*estudiante.move ();
+            
             
             //Girar a la izquierda
-            estudiante.turnLeft();
+            
             
             //Tomando decisiones, Si puedo tomar un Thing
             boolean puedeTomar = estudiante.canPickThing();
@@ -44,17 +74,21 @@ public class RobotBase
             estudiante.frontIsClear();
             
             //Invocando una funcion
-            creacionFuncion(4);
+            //creacionFuncion(4);
             
             //Toman un Thing
-            estudiante.pickThing();
-            
+            estudiante.pickThing();*/
+                    
             
 	}
         
-        public static void creacionFuncion(int parametroEntrada){
-            for (int i = 0; i < parametroEntrada; i++) 
+        public static void mover(int pasos){
+            for (int i = 0; i < pasos; i++) 
                 estudiante.move();
+        }
+        public static void giro(int giros){
+            for (int i = 0; i < giros; i++) 
+                estudiante.turnLeft();
         }
 }
 
