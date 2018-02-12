@@ -17,17 +17,38 @@ public class decisiones {
         
 	public static void main (String[] args){
             //Declarar la creacion de la ciudad
-            objetos = new City("Patron.txt");
+            objetos = new City("decisiones.txt");
 	    objetos.showThingCounts(true);
             
             //Direction.NORTH, EAST, SOUTH, WEST
             //Definicion de la ubicacion del robot, Ciudad, posicion, Direccion, Numero things en el bolso.
-            estudiante = new Robot(objetos,1, 0, Direction.EAST,10);
-            for(int i=5;i>0;i--){
-                for (int j=2;j>0;j--){
-                RobotBase.mover(i);
-                giro(3);
-                }
+            estudiante = new Robot(objetos,0, 1, Direction.SOUTH,0);
+           
+            do{
+                mover(1);
+                int c=recoger();
+                estudiante.turnLeft();
+                poner(c);
+                giro(2);
+                mover(c);
+                giro(1);
+            }while(estudiante.canPickThing());
+                  
+        }
+        
+        public static int recoger(){
+            int c=0;
+            while(estudiante.canPickThing()){
+                estudiante.pickThing();
+                c++;
+            }
+            return c;
+        }
+        
+        public static void poner(int a){
+            for(int i=a;i>0;i--){
+                estudiante.putThing();
+                estudiante.move();
             }
         }
         public static void mover(int pasos){
